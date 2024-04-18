@@ -11,6 +11,7 @@
 #include <utils.h>
 #include <config_category.h>
 #include <reading.h>
+#include <string>
 
 #include <lib60870/hal_thread.h>
 #include <lib60870/hal_time.h>
@@ -1436,8 +1437,13 @@ IEC104Server::send(const vector<Reading*>& readings)
                             cot == CS101_COT_RETURN_INFO_REMOTE || cot == CS101_COT_RETURN_INFO_LOCAL ||
                             cot == CS101_COT_BACKGROUND_SCAN)
                         {
-                            Iec104Utility::log_info("%s Sending data point %i:%i (%s)",
-                                                    beforeLog.c_str(), ca, ioa, IEC104DataPoint::getStringFromTypeID(type).c_str()); //LCOV_EXCL_LINE
+			    uint64_t tsInNs = Hal_getTimeInNs();
+                            std::string tsStrInNs = std::to_string(tsInNs);
+                            //Iec104Utility::log_info("%s Sending data point %i:%i (%s)",
+                            //                        beforeLog.c_str(), ca, ioa, IEC104DataPoint::getStringFromTypeID(type).c_str()); //LCOV_EXCL_LINE
+			    Iec104Utility::log_info("%s Sending data point %i:%i (%s) TimestampInNs: %s", 
+				                      beforeLog.c_str(), ca, ioa, IEC104DataPoint::getStringFromTypeID(type).c_str(), tsStrInNs.c_str()); //LCOV_EXCL_LINE
+
                             m_enqueueSpontDatapoint(dp, cot, (IEC60870_5_TypeID)type);
                         }
                         else {
