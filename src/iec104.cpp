@@ -2082,19 +2082,23 @@ IEC104Server::connectionEventHandler(void* parameter,
     if (event == CS104_CON_EVENT_CONNECTION_OPENED)
     {
         Iec104Utility::log_info("%s Connection opened (%s)", beforeLog.c_str(), ipAddrBuf); //LCOV_EXCL_LINE
+        Iec104Utility::audit_success("SRVFL", std::string(beforeLog) + std::string(ipAddrBuf) + " connection opened");
     }
     else if (event == CS104_CON_EVENT_CONNECTION_CLOSED)
     {
         Iec104Utility::log_info("%s Connection closed (%s)", beforeLog.c_str(), ipAddrBuf);//LCOV_EXCL_LINE
+        Iec104Utility::audit_fail("SRVFL", std::string(beforeLog) + std::string(ipAddrBuf) + " connection closed");
         self->removeOutstandingCommands(con);
     }
     else if (event == CS104_CON_EVENT_ACTIVATED)
     {
         Iec104Utility::log_info("%s Connection activated (%s)", beforeLog.c_str(), ipAddrBuf);//LCOV_EXCL_LINE
+        Iec104Utility::audit_info("SRVFL", std::string(beforeLog) + std::string(ipAddrBuf) + " connection activated");
     }
     else if (event == CS104_CON_EVENT_DEACTIVATED)
     {
         Iec104Utility::log_info("%s Connection deactivated (%s)", beforeLog.c_str(), ipAddrBuf);//LCOV_EXCL_LINE
+        Iec104Utility::audit_info("SRVFL", std::string(beforeLog) + std::string(ipAddrBuf) + " connection deactivated");
         self->removeOutstandingCommands(con);
     }
 }
