@@ -1400,7 +1400,7 @@ IEC104Server::send(const vector<Reading*>& readings)
 
                 if (cot == CS101_COT_ACTIVATION_CON)
                 {
-                    handleActCon(type, ca, ioa, isNegative);
+                    handleActCon(type, ca, ioa, isNegative); //thats a tag
                 }
                 else if (cot == CS101_COT_ACTIVATION_TERMINATION)
                 {
@@ -1979,7 +1979,9 @@ IEC104Server::asduHandler(void* parameter, IMasterConnection connection,
                                     }
                                     else {
                                         /* send ACT-CON later when south side feedback is received */
-                                        sendResponse = true;
+                                        sendResponse = false;
+                                        handleActCon(CS101_ASDU_getTypeID(asdu), ca, ioa, false);
+                                        handleActTerm(CS101_ASDU_getTypeID(asdu), ca, ioa, false);
                                     }
                                 }
                                 else {
