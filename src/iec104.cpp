@@ -1979,7 +1979,7 @@ IEC104Server::asduHandler(void* parameter, IMasterConnection connection,
                                     }
                                     else {
                                         /* send ACT-CON later when south side feedback is received */
-                                        sendResponse = false;
+                                        sendResponse = true;
                                     }
                                 }
                                 else {
