@@ -510,6 +510,16 @@ IEC104Config::importProtocolConfig(const std::string& protocolConfig)
         }
     }
 
+    if (applicationLayer.HasMember("cmd_auto_ack_term")) {
+        if (applicationLayer["cmd_auto_ack_term"].IsBool()) {
+            m_commandsAutoAckTerm = applicationLayer["cmd_auto_ack_term"].GetBool();
+        }
+        else {
+            Iec104Utility::log_warn("%s application_layer.cmd_auto_ack_term is not a bool -> using default value (%s)", beforeLog.c_str(),
+                                    (m_commandsAutoAckTerm?"true":"false"));
+        }
+    }
+
     if (applicationLayer.HasMember("cmd_recv_timeout")) {
         if (applicationLayer["cmd_recv_timeout"].IsInt()) {
             int cmdRecvTimeout = applicationLayer["cmd_recv_timeout"].GetInt();
@@ -882,6 +892,11 @@ bool IEC104Config::AllowCmdWithTime()
     else {
         return false;
     }
+}
+
+bool IEC104Config::CommandsAutoAckTerm()
+{
+    return m_commandsAutoAckTerm;
 }
 
 bool IEC104Config::AllowCmdWithoutTime()

@@ -46,6 +46,7 @@ public:
 
     bool AllowCmdWithTime();
     bool AllowCmdWithoutTime();
+    bool CommandsAutoAckTerm();
 
     int CmdRecvTimeout() {return m_cmdRecvTimeout;};
     int CmdExecTimeout() {return m_cmdExecTimeout;};
@@ -134,6 +135,7 @@ private:
     bool m_filterOriginators = false;
 
     int m_allowedCommands = 1; /* 0 - only without timestamp, 1 - only with timestamp, 2 - both */
+    bool m_commandsAutoAckTerm = false;
 
     int m_cmdRecvTimeout = 0;
     int m_cmdExecTimeout = 20;
