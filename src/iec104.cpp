@@ -1980,8 +1980,8 @@ IEC104Server::asduHandler(void* parameter, IMasterConnection connection,
                                     else {
                                         /* send ACT-CON later when south side feedback is received */
                                         sendResponse = false;
-                                        handleActCon(CS101_ASDU_getTypeID(asdu), ca, ioa, false);
-                                        handleActTerm(CS101_ASDU_getTypeID(asdu), ca, ioa, false);
+                                        self->handleActCon(CS101_ASDU_getTypeID(asdu), ca, ioa, false);
+                                        self->handleActTerm(CS101_ASDU_getTypeID(asdu), ca, ioa, false);
                                     }
                                 }
                                 else {
