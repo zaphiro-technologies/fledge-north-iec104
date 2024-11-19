@@ -2086,23 +2086,23 @@ IEC104Server::connectionEventHandler(void* parameter,
     if (event == CS104_CON_EVENT_CONNECTION_OPENED)
     {
         Iec104Utility::log_info("%s Connection opened (%s)", beforeLog.c_str(), ipAddrBuf); //LCOV_EXCL_LINE
-        Iec104Utility::audit_success("NHAVL", std::string(beforeLog) + std::string(ipAddrBuf) + " connection opened");
+        //Iec104Utility::audit_success("NHAVL", std::string(beforeLog) + std::string(ipAddrBuf) + " connection opened");
     }
     else if (event == CS104_CON_EVENT_CONNECTION_CLOSED)
     {
         Iec104Utility::log_info("%s Connection closed (%s)", beforeLog.c_str(), ipAddrBuf);//LCOV_EXCL_LINE
-        Iec104Utility::audit_fail("NHDWN", std::string(beforeLog) + std::string(ipAddrBuf) + " connection closed");
+        //Iec104Utility::audit_fail("NHDWN", std::string(beforeLog) + std::string(ipAddrBuf) + " connection closed");
         self->removeOutstandingCommands(con);
     }
     else if (event == CS104_CON_EVENT_ACTIVATED)
     {
         Iec104Utility::log_info("%s Connection activated (%s)", beforeLog.c_str(), ipAddrBuf);//LCOV_EXCL_LINE
-        Iec104Utility::audit_info("NHAVL", std::string(beforeLog) + std::string(ipAddrBuf) + " connection activated");
+        //Iec104Utility::audit_info("NHAVL", std::string(beforeLog) + std::string(ipAddrBuf) + " connection activated");
     }
     else if (event == CS104_CON_EVENT_DEACTIVATED)
     {
         Iec104Utility::log_info("%s Connection deactivated (%s)", beforeLog.c_str(), ipAddrBuf);//LCOV_EXCL_LINE
-        Iec104Utility::audit_info("NHDWN", std::string(beforeLog) + std::string(ipAddrBuf) + " connection deactivated");
+        //Iec104Utility::audit_info("NHDWN", std::string(beforeLog) + std::string(ipAddrBuf) + " connection deactivated");
         self->removeOutstandingCommands(con);
     }
 }
