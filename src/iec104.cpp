@@ -761,8 +761,9 @@ IEC104Server::checkTimestamp(CP56Time2a timestamp)
     else {
         timeDiff = (int)(currentTime - commandTime);
     }
-
-    if ((timeDiff > (m_config->CmdRecvTimeout() * 1000)) || (timeDiff < 0)) {
+    // Code changed fro testing
+    // if ((timeDiff > (m_config->CmdRecvTimeout() * 1000)) || (timeDiff < 0)) {
+    if ((timeDiff > (m_config->CmdRecvTimeout() * 1000))) {
         return false;
     }
     else {
